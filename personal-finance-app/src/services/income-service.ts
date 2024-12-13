@@ -1,46 +1,46 @@
 import axios, { AxiosResponse } from "axios";
-import Activity from "../contrasts/activity";
+import Income from "../contrasts/income";
 import Response from "../contrasts/base/response";
 import { toast } from "react-toastify";
 
-const baseUrl = "asd";
+const baseUrl = "dsa";
 
-const get = async (page: number, pageSize: number): Promise<Activity[]> => {
-  const response: AxiosResponse<Response<Activity[]>, any> = await axios.get(
-    `${baseUrl}?page=${page}&pageSize=${pageSize}`
+const get = async (userId: string): Promise<Income[]> => {
+  const response: AxiosResponse<Response<Income[]>> = await axios.get(
+    `${baseUrl}/user/${userId}`
   );
   if (response.data.isSuccessful) return response.data.data;
   toast.error(response.data.errors[0]);
 };
 
-const getById = async (id: string): Promise<Activity> => {
-  const response: AxiosResponse<Response<Activity>, any> = await axios.get(
+const getById = async (id: string): Promise<Income[]> => {
+  const response: AxiosResponse<Response<Income[]>, any> = await axios.get(
     `${baseUrl}/${id}`
   );
   if (response.data.isSuccessful) return response.data.data;
   toast.error(response.data.errors[0]);
 };
 
-const create = async (activity: Activity): Promise<Activity> => {
-  const response: AxiosResponse<Response<Activity>, any> = await axios.post(
+const create = async (expense: Income): Promise<Income[]> => {
+  const response: AxiosResponse<Response<Income[]>, any> = await axios.post(
     `${baseUrl}`,
-    activity
+    expense
   );
   if (response.data.isSuccessful) return response.data.data;
   toast.error(response.data.errors[0]);
 };
 
-const update = async (activity: Activity): Promise<Activity> => {
-  const response: AxiosResponse<Response<Activity>, any> = await axios.put(
+const update = async (expense: Income): Promise<Income[]> => {
+  const response: AxiosResponse<Response<Income[]>, any> = await axios.put(
     `${baseUrl}`,
-    activity
+    expense
   );
   if (response.data.isSuccessful) return response.data.data;
   toast.error(response.data.errors[0]);
 };
 
 const remove = async (id: string) => {
-  const response: any = await axios.delete(`${baseUrl}/${id}`);
+  const response = await axios.delete(`${baseUrl}/${id}`);
   if (response.data.isSuccessful) return response.data.data;
   toast.error(response.data.errors[0]);
 };
