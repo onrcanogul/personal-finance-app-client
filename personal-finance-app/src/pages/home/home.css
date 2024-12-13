@@ -1,0 +1,8 @@
+.homeDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 100px;
+  margin-top: 50px;
+}
