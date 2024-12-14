@@ -1,56 +1,67 @@
+import { Alert } from "@mui/material";
 import CustomCard from "../../components/card/card";
 import "./home.css";
 
 const Home = () => {
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <Alert severity="success" sx={{ width: "30%", marginTop: "30px" }}>
+        You can navigate pages from sidebar.
+      </Alert>
       <div className="homeDiv">
         <CustomCard
           name={"Expenses"}
           description={
-            "Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description "
+            "Track and manage your expenses effectively. View detailed expense descriptions and insights for better financial planning. "
           }
-          image={"asdasd"}
+          image={"src/assets/expenses.jpg"}
         />
         <CustomCard
           name={"Incomes"}
           description={
-            "Incomes Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description"
+            "Monitor your income sources in one place. Analyze detailed income breakdowns to make smarter financial decisions."
           }
-          image={"asdasd"}
+          image={"src/assets/income2.webp"}
         />
         <CustomCard
           name={"Portfolio"}
           description={
-            "Porfolio Description Expenses Description Expenses DescriptionExpenses Description Expenses Description Expenses Description Expenses Description Expenses Description"
+            "Manage your financial portfolio seamlessly. Access detailed portfolio information and gain insights for future investments."
           }
-          image={"asdasd"}
+          image={"src/assets/profile.jpg"}
         />
       </div>
       <div className="homeDiv">
         <CustomCard
           name={"Activity"}
           description={
-            "Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description "
+            "Log and track your financial activities. View a summary of key actions and make data-driven financial adjustments."
           }
-          image={"asdasd"}
+          image={"src/assets/activity.avif"}
         />
         <CustomCard
           name={"Budget"}
           description={
-            "Incomes Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description Expenses Description"
+            "Create, manage, and optimize your budgets. Access detailed budget insights and ensure your goals are met efficiently."
           }
-          image={"asdasd"}
+          image={"src/assets/budget.jpg"}
         />
         <CustomCard
           name={"Report"}
           description={
-            "Porfolio Description Expenses Description Expenses DescriptionExpenses Description Expenses Description Expenses Description Expenses Description Expenses Description"
+            "Generate comprehensive financial reports. Analyze key metrics and make informed decisions with detailed data."
           }
-          image={"asdasd"}
+          image={"src/assets/report.jpg"}
         />
       </div>
-    </>
+    </div>
   );
 };
 

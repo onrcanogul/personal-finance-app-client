@@ -1,11 +1,22 @@
+import React from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { Button } from "@mui/material";
+import SetPriceDialog from "../dialogs/setPriceDialog";
 
 const CustomAccordion = ({ title, description }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (_value: string) => {
+    setOpen(false);
+  };
   return (
     <Accordion style={{ width: "100%" }}>
       <AccordionSummary
@@ -17,8 +28,15 @@ const CustomAccordion = ({ title, description }) => {
       </AccordionSummary>
       <AccordionDetails>
         <Typography>{description}</Typography>
-        <Button style={{ textAlign: "right" }}>Set Price</Button>
+        <Button
+          style={{ textAlign: "right" }}
+          variant="outlined"
+          onClick={handleClickOpen}
+        >
+          Set Price
+        </Button>
       </AccordionDetails>
+      <SetPriceDialog selectedValue="asd" open={open} onClose={handleClose} />
     </Accordion>
   );
 };

@@ -10,7 +10,7 @@ export default function CustomCard({ name, description, image }) {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="200"
           image={image}
           alt="green iguana"
         />
