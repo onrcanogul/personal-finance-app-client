@@ -11,9 +11,8 @@ import { useSearchParams } from "react-router-dom";
 export default function ActivitiesTabs() {
   const [searchParams] = useSearchParams();
   const [value, setValue] = React.useState(0);
-
+  const type = searchParams.get("type");
   React.useEffect(() => {
-    const type = searchParams.get("type");
     if (type === "expenses") setValue(2);
     else if (type === "incomes") setValue(1);
   }, []);

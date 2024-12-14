@@ -6,7 +6,10 @@ import { getBaseUrl } from "./base/base-service";
 
 const baseUrl = `${getBaseUrl()}/activity`;
 
-const get = async (page: number, pageSize: number): Promise<Activity[]> => {
+export const get = async (
+  page: number,
+  pageSize: number
+): Promise<Activity[]> => {
   const response: AxiosResponse<Response<Activity[]>, any> = await axios.get(
     `${baseUrl}?page=${page}&pageSize=${pageSize}`
   );
@@ -14,7 +17,7 @@ const get = async (page: number, pageSize: number): Promise<Activity[]> => {
   toast.error(response.data.errors[0]);
 };
 
-const getById = async (id: string): Promise<Activity> => {
+export const getById = async (id: string): Promise<Activity> => {
   const response: AxiosResponse<Response<Activity>, any> = await axios.get(
     `${baseUrl}/${id}`
   );
@@ -22,7 +25,17 @@ const getById = async (id: string): Promise<Activity> => {
   toast.error(response.data.errors[0]);
 };
 
-const create = async (activity: Activity): Promise<Activity> => {
+export const getByActivityType = async (
+  activityType: number
+): Promise<Activity[]> => {
+  const response: AxiosResponse<Response<Activity[]>> = await axios.get(
+    `${baseUrl}/${activityType}`
+  );
+  if (response.data.isSuccessful) return response.data.data;
+  toast.error("Error while loading activities");
+};
+
+export const create = async (activity: Activity): Promise<Activity> => {
   const response: AxiosResponse<Response<Activity>, any> = await axios.post(
     `${baseUrl}`,
     activity
@@ -31,7 +44,7 @@ const create = async (activity: Activity): Promise<Activity> => {
   toast.error(response.data.errors[0]);
 };
 
-const update = async (activity: Activity): Promise<Activity> => {
+export const update = async (activity: Activity): Promise<Activity> => {
   const response: AxiosResponse<Response<Activity>, any> = await axios.put(
     `${baseUrl}`,
     activity
@@ -40,10 +53,8 @@ const update = async (activity: Activity): Promise<Activity> => {
   toast.error(response.data.errors[0]);
 };
 
-const remove = async (id: string) => {
+export const remove = async (id: string) => {
   const response: any = await axios.delete(`${baseUrl}/${id}`);
   if (response.data.isSuccessful) return response.data.data;
   toast.error(response.data.errors[0]);
 };
-
-export default { get, getById, create, update, remove };

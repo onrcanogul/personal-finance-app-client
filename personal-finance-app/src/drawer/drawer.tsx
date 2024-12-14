@@ -13,13 +13,20 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import XIcon from "@mui/icons-material/X";
+import { useNavigate } from "react-router-dom";
 
 const DrawerList = ({ handleOpenDrawer }) => {
+  const navigate = useNavigate();
+
+  const handleClick = (path: string) => {
+    navigate(path);
+  };
+
   return (
     <Box sx={{ width: 250 }} role="presentation" onClick={handleOpenDrawer}>
       <List>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={() => handleClick("/portfolio")}>
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
@@ -27,7 +34,7 @@ const DrawerList = ({ handleOpenDrawer }) => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={() => handleClick("/activity")}>
             <ListItemIcon>
               <AttachMoneyIcon />
             </ListItemIcon>
@@ -35,7 +42,7 @@ const DrawerList = ({ handleOpenDrawer }) => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={() => handleClick("/report")}>
             <ListItemIcon>
               <AssessmentIcon />
             </ListItemIcon>

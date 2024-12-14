@@ -12,6 +12,7 @@ export interface SimpleDialogProps {
   open: boolean;
   selectedValue: string;
   onClose: (value: string) => void;
+  title: string;
 }
 
 function SetPriceDialog(props: SimpleDialogProps) {
@@ -22,9 +23,7 @@ function SetPriceDialog(props: SimpleDialogProps) {
   };
   return (
     <Dialog onClose={handleClose} open={open} maxWidth="xs" fullWidth={true}>
-      <DialogTitle textAlign={"center"}>
-        Set Price for Eating Burger
-      </DialogTitle>
+      <DialogTitle textAlign={"center"}>{props.title}</DialogTitle>
       <DialogContent
         sx={{
           display: "flex",

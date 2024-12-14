@@ -12,10 +12,11 @@ import { ToastContainer } from "material-react-toastify";
 import "material-react-toastify/dist/ReactToastify.css";
 
 function App() {
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (isTokenExpired()) refreshTokenLogin();
-  // }, [navigate]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("accessToken"))
+      if (isTokenExpired()) refreshTokenLogin();
+  }, [navigate]);
   return (
     <>
       <Header />

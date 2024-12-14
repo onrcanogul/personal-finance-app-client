@@ -7,7 +7,6 @@ import { getBaseUrl } from "./base/base-service";
 const baseUrl = `${getBaseUrl()}/user`;
 
 export const login = async (model: Partial<Login>) => {
-  debugger;
   const response = await axios.post(`${baseUrl}/login`, model);
   if (response?.data?.isSuccessful) {
     localStorage.setItem("accessToken", response.data.data.accessToken);
@@ -23,8 +22,11 @@ export const login = async (model: Partial<Login>) => {
 export const register = async (model: Partial<Register>) => {
   debugger;
   const response = await axios.post(`${baseUrl}/register`, model);
-  if (response.data.isSuccessful) return response.data.data;
-  toast.error(response.data.errors[0]);
+  if (response.data.isSuccessful) {
+    toast.success("Registered Successfuly");
+  } else {
+    toast.error(response.data.errors[0]);
+  }
   return response.data;
 };
 
@@ -72,4 +74,5 @@ export const refreshTokenLogin = () => {
 export const logout = () => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
+  toast.warning("You have authenticate before doing something.");
 };

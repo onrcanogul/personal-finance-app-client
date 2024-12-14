@@ -36,7 +36,12 @@ const CustomAccordion = ({ title, description }) => {
           Set Price
         </Button>
       </AccordionDetails>
-      <SetPriceDialog selectedValue="asd" open={open} onClose={handleClose} />
+      <SetPriceDialog
+        selectedValue="asd"
+        title={title}
+        open={open}
+        onClose={handleClose}
+      />
     </Accordion>
   );
 };
