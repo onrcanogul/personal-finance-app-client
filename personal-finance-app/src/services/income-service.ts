@@ -1,9 +1,10 @@
 import axios, { AxiosResponse } from "axios";
 import Income from "../contrasts/income";
 import Response from "../contrasts/base/response";
-import { toast } from "react-toastify";
+import { toast } from "material-react-toastify";
+import { getBaseUrl } from "./base/base-service";
 
-const baseUrl = "dsa";
+const baseUrl = `${getBaseUrl()}/income`;
 
 const get = async (userId: string): Promise<Income[]> => {
   const response: AxiosResponse<Response<Income[]>> = await axios.get(

@@ -191,15 +191,6 @@ export default function Header() {
           >
             PF
           </Typography>
-          <Search style={{ border: "1px solid lightgray", marginLeft: "20px" }}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton

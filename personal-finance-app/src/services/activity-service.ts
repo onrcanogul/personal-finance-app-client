@@ -1,9 +1,10 @@
 import axios, { AxiosResponse } from "axios";
 import Activity from "../contrasts/activity";
 import Response from "../contrasts/base/response";
-import { toast } from "react-toastify";
+import { toast } from "material-react-toastify";
+import { getBaseUrl } from "./base/base-service";
 
-const baseUrl = "asd";
+const baseUrl = `${getBaseUrl()}/activity`;
 
 const get = async (page: number, pageSize: number): Promise<Activity[]> => {
   const response: AxiosResponse<Response<Activity[]>, any> = await axios.get(

@@ -1,21 +1,27 @@
 import axios from "axios";
 import Register from "../contrasts/dtos/register";
 import Login from "../contrasts/dtos/login";
-import { toast } from "react-toastify";
+import { toast } from "material-react-toastify";
+import { getBaseUrl } from "./base/base-service";
 
-const baseUrl = "asd";
+const baseUrl = `${getBaseUrl()}/user`;
 
-export const login = async (model: Login) => {
+export const login = async (model: Partial<Login>) => {
+  debugger;
   const response = await axios.post(`${baseUrl}/login`, model);
-  if (response.data.isSuccessful) {
+  if (response?.data?.isSuccessful) {
     localStorage.setItem("accessToken", response.data.data.accessToken);
     localStorage.setItem("refreshToken", response.data.data.refreshToken);
     toast.success("Login is successful");
+    return true;
+  } else {
+    toast.error(response.data.errors[0]);
+    return false;
   }
-  toast.error(response.data.errors[0]);
 };
 
-export const register = async (model: Register) => {
+export const register = async (model: Partial<Register>) => {
+  debugger;
   const response = await axios.post(`${baseUrl}/register`, model);
   if (response.data.isSuccessful) return response.data.data;
   toast.error(response.data.errors[0]);
