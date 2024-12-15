@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CircularProgress,
-  Typography,
-} from "@mui/material";
 import BudgetEntity from "../../contrasts/budget";
 import { get } from "../../services/budget-service";
 import { currentUserId } from "../../services/user-service";
 import { toast } from "material-react-toastify";
+import UserCard from "../../components/card/user-card";
+import Spinner from "../../components/spinner/spinner";
 
 const Budget = () => {
   const [budget, setBudget] = useState<BudgetEntity>();
@@ -42,26 +36,12 @@ const Budget = () => {
         height: "80vh",
       }}
     >
-      <Card sx={{ width: "75%" }}>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="h3" component="div">
-              {budget?.user?.username ?? "Onurcan Oğul"}
-            </Typography>
-            <Typography variant="h5" sx={{ color: "text.secondary" }}>
-              Incomes : {budget?.totalIncome ?? "1400"}
-            </Typography>
-            <Typography variant="h5" sx={{ color: "text.secondary" }}>
-              Expenses : {budget?.totalExpense ?? "1300"}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-      {isLoading && (
-        <Box className="spinner">
-          <CircularProgress />
-        </Box>
-      )}
+      <UserCard
+        name={budget?.user?.username ?? "Onurcan Oğul"}
+        income={budget?.totalIncome ?? "1400"}
+        expense={budget?.totalExpense ?? "1300"}
+      />
+      <Spinner isLoading />
     </div>
   );
 };
