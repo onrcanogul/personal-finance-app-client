@@ -6,7 +6,7 @@ import { getBaseUrl } from "./base/base-service";
 
 const baseUrl = `${getBaseUrl()}/expense`;
 
-const get = async (userId: string): Promise<Expense[]> => {
+export const get = async (userId: string): Promise<Expense[]> => {
   const response: AxiosResponse<Response<Expense[]>> = await axios.get(
     `${baseUrl}/user/${userId}`
   );
@@ -14,7 +14,7 @@ const get = async (userId: string): Promise<Expense[]> => {
   toast.error(response.data.errors[0]);
 };
 
-const getById = async (id: string): Promise<Expense[]> => {
+export const getById = async (id: string): Promise<Expense[]> => {
   const response: AxiosResponse<Response<Expense[]>> = await axios.get(
     `${baseUrl}/${id}`
   );
@@ -22,28 +22,41 @@ const getById = async (id: string): Promise<Expense[]> => {
   toast.error(response.data.errors[0]);
 };
 
-const create = async (expense: Expense): Promise<Expense[]> => {
-  const response: AxiosResponse<Response<Expense[]>> = await axios.post(
-    `${baseUrl}`,
-    expense
-  );
-  if (response.data.isSuccessful) return response.data.data;
-  toast.error(response.data.errors[0]);
+export const create = async (expense: Partial<Expense>): Promise<void> => {
+  await axios
+    .post(`${baseUrl}`, expense)
+    .then((response) => {
+      if (response.data.isSuccessful)
+        toast.success("Expense has created successfuly");
+      else toast.error(response.data.errors[0]);
+    })
+    .catch((error) => {
+      toast.error(error);
+    });
 };
 
-const update = async (expense: Expense): Promise<Expense[]> => {
-  const response: AxiosResponse<Response<Expense[]>> = await axios.put(
-    `${baseUrl}`,
-    expense
-  );
-  if (response.data.isSuccessful) return response.data.data;
-  toast.error(response.data.errors[0]);
+export const update = async (expense: Partial<Expense>): Promise<void> => {
+  await axios
+    .put(`${baseUrl}`, expense)
+    .then((response) => {
+      if (response.data.isSuccessful)
+        toast.success("Expense has updated successfuly");
+      else toast.error(response.data.errors[0]);
+    })
+    .catch((error) => {
+      toast.error(error);
+    });
 };
 
-const remove = async (id: string) => {
-  const response = await axios.delete(`${baseUrl}/${id}`);
-  if (response.data.isSuccessful) return response.data.data;
-  toast.error(response.data.errors[0]);
+export const remove = async (id: string) => {
+  await axios
+    .delete(`${baseUrl}/${id}`)
+    .then((response) => {
+      if (response.data.isSuccessful)
+        toast.success("Expense has deleted successfuly");
+      else toast.error(response.data.errors[0]);
+    })
+    .catch((error) => {
+      toast.error(error);
+    });
 };
-
-export default { get, getById, create, update, remove };

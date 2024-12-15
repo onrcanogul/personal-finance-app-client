@@ -7,7 +7,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { Button } from "@mui/material";
 import SetPriceDialog from "../dialogs/setPriceDialog";
 
-const CustomAccordion = ({ title, description }) => {
+const CustomAccordion = ({ title, description, isIncome, activityId }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -41,6 +41,8 @@ const CustomAccordion = ({ title, description }) => {
         title={title}
         open={open}
         onClose={handleClose}
+        isIncome={isIncome}
+        activityId={activityId}
       />
     </Accordion>
   );

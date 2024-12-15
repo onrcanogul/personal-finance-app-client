@@ -6,12 +6,10 @@ import { getBaseUrl } from "./base/base-service";
 
 const baseUrl = `${getBaseUrl()}/budget`;
 
-const get = async (userId: string): Promise<Budget> => {
+export const get = async (userId: string): Promise<Budget> => {
   const response: AxiosResponse<Response<Budget>> = await axios.get(
     `${baseUrl}/${userId}`
   );
   if (response.data.isSuccessful) return response.data.data;
   toast.error(response.data.errors[0]);
 };
-
-export default { get };

@@ -1,6 +1,38 @@
-import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
+import BudgetEntity from "../../contrasts/budget";
+import { get } from "../../services/budget-service";
+import { currentUserId } from "../../services/user-service";
+import { toast } from "material-react-toastify";
 
 const Budget = () => {
+  const [budget, setBudget] = useState<BudgetEntity>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    if (!currentUserId())
+      toast.error("You have to authenticate before going on");
+    else {
+      const response = await get(currentUserId());
+      setBudget(response);
+    }
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 200);
+    return () => clearTimeout(timer);
+  };
+
   return (
     <div
       style={{
@@ -14,17 +46,22 @@ const Budget = () => {
         <CardActionArea>
           <CardContent>
             <Typography gutterBottom variant="h3" component="div">
-              Onurcan Oğul
+              {budget?.user?.username ?? "Onurcan Oğul"}
             </Typography>
             <Typography variant="h5" sx={{ color: "text.secondary" }}>
-              Incomes : 1500 TL
+              Incomes : {budget?.totalIncome ?? "1400"}
             </Typography>
             <Typography variant="h5" sx={{ color: "text.secondary" }}>
-              Expenses : 2000 TL
+              Expenses : {budget?.totalExpense ?? "1300"}
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
+      {isLoading && (
+        <Box className="spinner">
+          <CircularProgress />
+        </Box>
+      )}
     </div>
   );
 };

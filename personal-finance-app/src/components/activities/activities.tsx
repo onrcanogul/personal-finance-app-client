@@ -35,40 +35,12 @@ const Activities = ({ isIncome }) => {
               key={key}
               title={activity.name}
               description={activity.description}
+              isIncome={isIncome}
+              activityId={activity.id}
             />
           </div>
         );
       })}
-      <div style={{ width: "50%", marginTop: "30px" }}>
-        <CustomAccordion
-          title={"Eating a burger"}
-          description={"Eating a burger"}
-        />
-      </div>
-      <div style={{ width: "50%", marginTop: "30px" }}>
-        <CustomAccordion
-          title={"Eating a burger"}
-          description={"Eating a burger"}
-        />
-      </div>
-      <div style={{ width: "50%", marginTop: "30px" }}>
-        <CustomAccordion
-          title={"Eating a burger"}
-          description={"Eating a burger"}
-        />
-      </div>
-      <div style={{ width: "50%", marginTop: "30px" }}>
-        <CustomAccordion
-          title={"Eating a burger"}
-          description={"Eating a burger"}
-        />
-      </div>
-      <div style={{ width: "50%", marginTop: "30px" }}>
-        <CustomAccordion
-          title={"Eating a burger"}
-          description={"Eating a burger"}
-        />
-      </div>
       {isLoading && (
         <Box className="spinner">
           <CircularProgress />

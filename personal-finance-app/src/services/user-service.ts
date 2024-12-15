@@ -7,16 +7,17 @@ import { getBaseUrl } from "./base/base-service";
 const baseUrl = `${getBaseUrl()}/user`;
 
 export const login = async (model: Partial<Login>) => {
-  const response = await axios.post(`${baseUrl}/login`, model);
-  if (response?.data?.isSuccessful) {
-    localStorage.setItem("accessToken", response.data.data.accessToken);
-    localStorage.setItem("refreshToken", response.data.data.refreshToken);
-    toast.success("Login is successful");
-    return true;
-  } else {
-    toast.error(response.data.errors[0]);
-    return false;
-  }
+  axios
+    .post(`${baseUrl}/login`, model)
+    .then((response) => {
+      localStorage.setItem("accessToken", response.data.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.data.refreshToken);
+      toast.success("Login is successful");
+    })
+    .catch((error) => {
+      toast.error(error.message);
+      return false;
+    });
 };
 
 export const register = async (model: Partial<Register>) => {
